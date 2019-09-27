@@ -48,15 +48,16 @@ namespace DictionnaryGen
                 try
                 {
                     var fileStream = File.OpenRead(filePath);
-
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         toolStripStatusLabel1.Text = "Loading file";
-                        fileContent = reader.ReadToEnd();
-                        fileContent = RemoveSpecialCharacters(fileContent);
+                        //fileContent = reader.ReadToEnd();
+                        //fileContent = RemoveSpecialCharacters(fileContent);
                         toolStripStatusLabel1.Text = "File loaded !";
-                        
-                        textBox1.Text = fileContent;
+                        String line;
+                        while ((line = reader.ReadLine()) !=null ){
+                            textBox1.AppendText(line);
+                        }
                     }
                 }
                 catch
@@ -73,6 +74,37 @@ namespace DictionnaryGen
         public static string RemoveSpecialCharacters(string str)
         {
             return Regex.Replace(str, "[^a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\r]+", "", RegexOptions.Compiled);
+        }
+
+        static void permute(String input)
+        {
+            int n = input.Length;
+
+            // Number of permutations is 2^n 
+            int max = 1 << n;
+
+            // Converting string 
+            // to lower case 
+            input = input.ToLower();
+
+            // Using all subsequences  
+            // and permuting them 
+            for (int i = 0; i < max; i++)
+            {
+                char[] combination = input.ToCharArray();
+
+                // If j-th bit is set, we  
+                // convert it to upper case 
+                for (int j = 0; j < n; j++)
+                {
+                    if (((i >> j) & 1) == 1)
+                        combination[j] = (char)(combination[j] - 32);
+                }
+
+                // Printing current combination 
+                Console.Write(combination);
+                Console.Write(" ");
+            }
         }
         private void Form1_Load(object sender, EventArgs e)
         {
