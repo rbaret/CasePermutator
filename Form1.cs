@@ -20,6 +20,8 @@ namespace DictionnaryGen
         }
         String fileContent;
         String filePath;
+        int permNumber;
+        int permDone;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -53,11 +55,28 @@ namespace DictionnaryGen
                         toolStripStatusLabel1.Text = "Loading file";
                         //fileContent = reader.ReadToEnd();
                         //fileContent = RemoveSpecialCharacters(fileContent);
-                        toolStripStatusLabel1.Text = "File loaded !";
+                        permNumber = 0;
+                        permDone = 0;
                         String line;
-                        while ((line = reader.ReadLine()) !=null ){
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            int permPossible = countPossibilities(line.Length);
+                            permNumber += permPossible;
                             textBox1.AppendText(line);
+                            textBox1.AppendText(" Combinaisons possibles : ");
+                            textBox1.AppendText(permPossible.ToString());
+                            textBox1.AppendText(Environment.NewLine);
                         }
+                        fileStream.Position = 0;
+                        reader.DiscardBufferedData();
+                        while ((line = reader.ReadLine()) !=null ){
+                            permute(line);
+                        }
+                        textBox1.AppendText(Environment.NewLine);
+                        textBox1.AppendText(permNumber.ToString());
+                        textBox1.AppendText(Environment.NewLine);
+                        textBox1.AppendText(permDone.ToString());
+                        toolStripStatusLabel1.Text = "File loaded !";
                     }
                 }
                 catch
@@ -71,12 +90,12 @@ namespace DictionnaryGen
 
         }
 
-        public static string RemoveSpecialCharacters(string str)
+        private static string RemoveSpecialCharacters(string str)
         {
             return Regex.Replace(str, "[^a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\r]+", "", RegexOptions.Compiled);
         }
 
-        static void permute(String input)
+        private void permute(String input)
         {
             int n = input.Length;
 
@@ -98,13 +117,21 @@ namespace DictionnaryGen
                 for (int j = 0; j < n; j++)
                 {
                     if (((i >> j) & 1) == 1)
+                    {
                         combination[j] = (char)(combination[j] - 32);
+                    }
                 }
-
                 // Printing current combination 
-                Console.Write(combination);
-                Console.Write(" ");
+                textBox1.AppendText(new String(combination));
+                textBox1.AppendText(Environment.NewLine);
+                permDone++;
+                toolStripProgressBar1.Value = 100 * (permDone / permNumber);
             }
+        }
+
+        private int countPossibilities(int cLength)
+        {
+            return((int)Math.Pow(2,(double) cLength));
         }
         private void Form1_Load(object sender, EventArgs e)
         {

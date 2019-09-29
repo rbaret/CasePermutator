@@ -30,12 +30,12 @@
         {
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +55,11 @@
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
             this.toolStripProgressBar1.Size = new System.Drawing.Size(150, 16);
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(17, 228);
@@ -73,6 +78,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.SelectedPath = "E:\\Donnees\\Richard\\Documents";
+            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(17, 22);
@@ -89,11 +98,6 @@
             this.button2.Text = "Load file";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 
