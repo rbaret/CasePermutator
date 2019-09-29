@@ -50,6 +50,7 @@ namespace DictionnaryGen
                 try
                 {
                     var fileStream = File.OpenRead(filePath);
+                    toolStripProgressBar1.Enabled = true;
                     using (StreamReader reader = new StreamReader(fileStream))
                     {
                         toolStripStatusLabel1.Text = "Loading file";
@@ -62,20 +63,12 @@ namespace DictionnaryGen
                         {
                             int permPossible = countPossibilities(line.Length);
                             permNumber += permPossible;
-                            textBox1.AppendText(line);
-                            textBox1.AppendText(" Combinaisons possibles : ");
-                            textBox1.AppendText(permPossible.ToString());
-                            textBox1.AppendText(Environment.NewLine);
                         }
                         fileStream.Position = 0;
                         reader.DiscardBufferedData();
                         while ((line = reader.ReadLine()) !=null ){
                             permute(line);
                         }
-                        textBox1.AppendText(Environment.NewLine);
-                        textBox1.AppendText(permNumber.ToString());
-                        textBox1.AppendText(Environment.NewLine);
-                        textBox1.AppendText(permDone.ToString());
                         toolStripStatusLabel1.Text = "File loaded !";
                     }
                 }
@@ -125,7 +118,7 @@ namespace DictionnaryGen
                 textBox1.AppendText(new String(combination));
                 textBox1.AppendText(Environment.NewLine);
                 permDone++;
-                toolStripProgressBar1.Value = 100 * (permDone / permNumber);
+                toolStripProgressBar1.Value = (100 * permDone)/permNumber;
             }
         }
 
