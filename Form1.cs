@@ -72,10 +72,14 @@ namespace DictionnaryGen
                     toolStripStatusLabel1.Text = "File loaded !";
                 }
             }
-            catch(ArgumentNullException Ex)
+            catch(ArgumentNullException ArgNullEx)
             {
-                toolStripStatusLabel1.Text = "Chemin de fichier incorrect";
+                toolStripStatusLabel1.Text = "Incorrect file path";
 
+            }
+            catch(OutOfMemoryException OomEx)
+            {
+                System.Windows.Forms.MessageBox.Show("Not enough memory to perform the operation");
             }
         }
 
