@@ -18,10 +18,10 @@ namespace DictionnaryGen
         {
             InitializeComponent();
         }
-        String fileContent;
-        String filePath;
-        int permNumber;
-        int permDone;
+        private String fileContent;
+        private String filePath;
+        private int permNumber;
+        private int permDone;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -46,41 +46,37 @@ namespace DictionnaryGen
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(!String.IsNullOrEmpty(textBox2.Text))
-                try
-                {
-                    var fileStream = File.OpenRead(filePath);
-                    toolStripProgressBar1.Enabled = true;
-                    using (StreamReader reader = new StreamReader(fileStream))
-                    {
-                        toolStripStatusLabel1.Text = "Loading file";
-                        //fileContent = reader.ReadToEnd();
-                        //fileContent = RemoveSpecialCharacters(fileContent);
-                        permNumber = 0;
-                        permDone = 0;
-                        String line;
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            int permPossible = countPossibilities(line.Length);
-                            permNumber += permPossible;
-                        }
-                        fileStream.Position = 0;
-                        reader.DiscardBufferedData();
-                        while ((line = reader.ReadLine()) !=null ){
-                            permute(line);
-                        }
-                        toolStripStatusLabel1.Text = "File loaded !";
-                    }
-                }
-                catch
-                {
-
-                }
-            else
+            try
             {
-                toolStripStatusLabel1.Text = "File path not set!";
+                var fileStream = File.OpenRead(filePath);
+                toolStripProgressBar1.Enabled = true;
+                using (StreamReader reader = new StreamReader(fileStream))
+                {
+                    toolStripStatusLabel1.Text = "Loading file";
+                    //fileContent = reader.ReadToEnd();
+                    //fileContent = RemoveSpecialCharacters(fileContent);
+                    permNumber = 0;
+                    permDone = 0;
+                    String line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        int permPossible = countPossibilities(line.Length);
+                        permNumber += permPossible;
+                    }
+                    fileStream.Position = 0;
+                    reader.DiscardBufferedData();
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        permute(line);
+                    }
+                    toolStripStatusLabel1.Text = "File loaded !";
+                }
             }
+            catch(ArgumentNullException Ex)
+            {
+                toolStripStatusLabel1.Text = "Chemin de fichier incorrect";
 
+            }
         }
 
         private static string RemoveSpecialCharacters(string str)
@@ -125,6 +121,11 @@ namespace DictionnaryGen
         private int countPossibilities(int cLength)
         {
             return((int)Math.Pow(2,(double) cLength));
+        }
+        private bool saveFile()
+        {
+            
+            return true;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
