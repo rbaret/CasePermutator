@@ -23,7 +23,7 @@ namespace DictionnaryGen
         private int permNumber;
         private int permDone;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void browseButton_Click(object sender, EventArgs e)
         {
             fileContent = string.Empty;
             filePath = string.Empty;
@@ -44,7 +44,7 @@ namespace DictionnaryGen
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void loadBUtton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -72,12 +72,12 @@ namespace DictionnaryGen
                     toolStripStatusLabel1.Text = "File loaded !";
                 }
             }
-            catch(ArgumentNullException ArgNullEx)
+            catch (ArgumentNullException ArgNullEx)
             {
                 toolStripStatusLabel1.Text = "Incorrect file path";
 
             }
-            catch(OutOfMemoryException OomEx)
+            catch (OutOfMemoryException OomEx)
             {
                 System.Windows.Forms.MessageBox.Show("Not enough memory to perform the operation");
             }
@@ -118,22 +118,37 @@ namespace DictionnaryGen
                 textBox1.AppendText(new String(combination));
                 textBox1.AppendText(Environment.NewLine);
                 permDone++;
-                toolStripProgressBar1.Value = (100 * permDone)/permNumber;
+                toolStripProgressBar1.Value = (100 * permDone) / permNumber;
             }
         }
 
         private int countPossibilities(int cLength)
         {
-            return((int)Math.Pow(2,(double) cLength));
+            return ((int)Math.Pow(2, (double)cLength));
         }
         private bool saveFile()
         {
-            
+
             return true;
         }
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Text File|*.txt";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.FileName != "")
+            {
+                StreamWriter fs = new StreamWriter(saveFileDialog1.OpenFile());
+                fs.Write(textBox1.Text);
+                fs.Dispose();
+                fs.Close();
+            }
         }
     }
 }
