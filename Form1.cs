@@ -20,9 +20,10 @@ namespace DictionnaryGen
         }
         private String fileContent;
         private String filePath;
+        private String outputPath = "C:\\temp\\output.txt";
         private int permNumber;
         private int permDone;
-        private List<String> permList;
+        private List<String> permList = new List<string>();
 
         private void browseButton_Click(object sender, EventArgs e)
         {
@@ -68,8 +69,8 @@ namespace DictionnaryGen
                     {
                         permute(line);
                     }
-                    toolStripStatusLabel1.Text = "File loaded !";
-                    textBox1.AppendText = permArray;
+                    flushPermutations();
+                    toolStripStatusLabel1.Text = "Yataa !";
                 }
             }
             catch (ArgumentNullException ArgNullEx)
@@ -81,11 +82,15 @@ namespace DictionnaryGen
             {
                 System.Windows.Forms.MessageBox.Show("Not enough memory to perform the operation");
             }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.Message);
+            }
         }
 
         private static string RemoveSpecialCharacters(string str)
         {
-            return Regex.Replace(str, "[^a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\r]+", "", RegexOptions.Compiled);
+            return Regex.Replace(str, "[^a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\r]+", "", RegexOptions.Compiled);
         }
 
         private void permute(String input)
@@ -115,11 +120,34 @@ namespace DictionnaryGen
                     }
                 }
                 // Printing current combination 
-                permArray[permDone] = combination[j];
+                storePermutation(combination);
                 permDone++;
                 toolStripProgressBar1.Value = (100 * permDone) / permNumber;
             }
         }
+
+        private void storePermutation(char[] combination)
+        {
+            permList.Add(new  String(combination));
+            if(permList.Count == 1000)
+            {
+                flushPermutations();
+            }
+          
+        }
+
+        private void flushPermutations()
+        {
+            StreamWriter fs = File.AppendText(outputPath);
+            foreach (String permutation in permList)
+            {
+                fs.WriteLine(permutation);
+            }
+            fs.Dispose();
+            fs.Close();
+            permList.Clear();
+        }
+
 
         private int countPossibilities(int cLength)
         {
