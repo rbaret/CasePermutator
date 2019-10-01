@@ -22,6 +22,7 @@ namespace DictionnaryGen
         private String filePath;
         private int permNumber;
         private int permDone;
+        private List<String> permList;
 
         private void browseButton_Click(object sender, EventArgs e)
         {
@@ -53,8 +54,6 @@ namespace DictionnaryGen
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
                     toolStripStatusLabel1.Text = "Loading file";
-                    //fileContent = reader.ReadToEnd();
-                    //fileContent = RemoveSpecialCharacters(fileContent);
                     permNumber = 0;
                     permDone = 0;
                     String line;
@@ -70,6 +69,7 @@ namespace DictionnaryGen
                         permute(line);
                     }
                     toolStripStatusLabel1.Text = "File loaded !";
+                    textBox1.AppendText = permArray;
                 }
             }
             catch (ArgumentNullException ArgNullEx)
@@ -91,7 +91,7 @@ namespace DictionnaryGen
         private void permute(String input)
         {
             int n = input.Length;
-
+            permDone = 0;
             // Number of permutations is 2^n 
             int max = 1 << n;
 
@@ -115,8 +115,7 @@ namespace DictionnaryGen
                     }
                 }
                 // Printing current combination 
-                textBox1.AppendText(new String(combination));
-                textBox1.AppendText(Environment.NewLine);
+                permArray[permDone] = combination[j];
                 permDone++;
                 toolStripProgressBar1.Value = (100 * permDone) / permNumber;
             }
@@ -126,11 +125,7 @@ namespace DictionnaryGen
         {
             return ((int)Math.Pow(2, (double)cLength));
         }
-        private bool saveFile()
-        {
 
-            return true;
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
 

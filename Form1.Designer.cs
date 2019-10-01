@@ -46,7 +46,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 503);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 412);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(498, 22);
             this.statusStrip1.TabIndex = 0;
@@ -128,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 525);
+            this.ClientSize = new System.Drawing.Size(498, 434);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.loadButton);
@@ -137,7 +137,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
-            this.Text = "Case Combinator";
+            this.Text = "Case Permutator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
