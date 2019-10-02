@@ -31,14 +31,15 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.browseButton = new System.Windows.Forms.Button();
+            this.browseInputButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.loadButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.inputPathTextbox = new System.Windows.Forms.TextBox();
+            this.generateButton = new System.Windows.Forms.Button();
+            this.outputPathTextbox = new System.Windows.Forms.TextBox();
+            this.browseOutputButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.openFileButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,83 +65,97 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
-            // browseButton
+            // browseInputButton
             // 
-            this.browseButton.Location = new System.Drawing.Point(412, 22);
-            this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(67, 20);
-            this.browseButton.TabIndex = 2;
-            this.browseButton.Text = "Browse...";
-            this.browseButton.UseVisualStyleBackColor = true;
-            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
+            this.browseInputButton.Location = new System.Drawing.Point(412, 22);
+            this.browseInputButton.Name = "browseInputButton";
+            this.browseInputButton.Size = new System.Drawing.Size(67, 20);
+            this.browseInputButton.TabIndex = 2;
+            this.browseInputButton.Text = "Browse...";
+            this.browseInputButton.UseVisualStyleBackColor = true;
+            this.browseInputButton.Click += new System.EventHandler(this.browseOutputButton_Click);
             // 
             // folderBrowserDialog1
             // 
             this.folderBrowserDialog1.SelectedPath = "E:\\Donnees\\Richard\\Documents";
             // 
-            // textBox2
+            // inputPathTextbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(150, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(256, 20);
-            this.textBox2.TabIndex = 3;
+            this.inputPathTextbox.Location = new System.Drawing.Point(83, 22);
+            this.inputPathTextbox.Name = "inputPathTextbox";
+            this.inputPathTextbox.Size = new System.Drawing.Size(323, 20);
+            this.inputPathTextbox.TabIndex = 3;
             // 
-            // loadButton
+            // generateButton
             // 
-            this.loadButton.Location = new System.Drawing.Point(17, 125);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 23);
-            this.loadButton.TabIndex = 4;
-            this.loadButton.Text = "Load file";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadBUtton_Click);
+            this.generateButton.Enabled = false;
+            this.generateButton.Location = new System.Drawing.Point(20, 88);
+            this.generateButton.Name = "generateButton";
+            this.generateButton.Size = new System.Drawing.Size(75, 23);
+            this.generateButton.TabIndex = 4;
+            this.generateButton.Text = "Generate !";
+            this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
             // 
-            // textBox1
+            // outputPathTextbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(150, 48);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 20);
-            this.textBox1.TabIndex = 6;
+            this.outputPathTextbox.Location = new System.Drawing.Point(83, 48);
+            this.outputPathTextbox.Name = "outputPathTextbox";
+            this.outputPathTextbox.Size = new System.Drawing.Size(323, 20);
+            this.outputPathTextbox.TabIndex = 6;
             // 
-            // button1
+            // browseOutputButton
             // 
-            this.button1.Location = new System.Drawing.Point(412, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 20);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Browse...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.browseOutputButton.Location = new System.Drawing.Point(412, 48);
+            this.browseOutputButton.Name = "browseOutputButton";
+            this.browseOutputButton.Size = new System.Drawing.Size(67, 20);
+            this.browseOutputButton.TabIndex = 5;
+            this.browseOutputButton.Text = "Browse...";
+            this.browseOutputButton.UseVisualStyleBackColor = true;
+            this.browseOutputButton.Click += new System.EventHandler(this.browseOutputButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 22);
+            this.label1.Location = new System.Drawing.Point(17, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.label1.Text = "Input file";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 48);
+            this.label2.Location = new System.Drawing.Point(17, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "label2";
+            this.label2.Text = "Output file";
+            // 
+            // openFileButton
+            // 
+            this.openFileButton.Enabled = false;
+            this.openFileButton.Location = new System.Drawing.Point(102, 88);
+            this.openFileButton.Name = "openFileButton";
+            this.openFileButton.Size = new System.Drawing.Size(75, 23);
+            this.openFileButton.TabIndex = 9;
+            this.openFileButton.Text = "Open file";
+            this.openFileButton.UseVisualStyleBackColor = true;
+            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(498, 173);
+            this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.loadButton);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.browseButton);
+            this.Controls.Add(this.outputPathTextbox);
+            this.Controls.Add(this.browseOutputButton);
+            this.Controls.Add(this.generateButton);
+            this.Controls.Add(this.inputPathTextbox);
+            this.Controls.Add(this.browseInputButton);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
             this.Text = "Case Permutator";
@@ -155,16 +170,17 @@
         #endregion
 
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.Button browseInputButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.TextBox inputPathTextbox;
+        private System.Windows.Forms.Button generateButton;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox outputPathTextbox;
+        private System.Windows.Forms.Button browseOutputButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button openFileButton;
     }
 }
 

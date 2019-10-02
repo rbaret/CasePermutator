@@ -14,43 +14,67 @@ namespace DictionnaryGen
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        
         private String fileContent;
-        private String filePath;
-        private String outputPath = "C:\\temp\\output.txt";
+        private String inputFilePath;
+        private String outputFilePath;
         private int permNumber;
         private int permDone;
         private List<String> permList = new List<string>();
 
-        private void browseButton_Click(object sender, EventArgs e)
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void browseInputButton_Click(object sender, EventArgs e)
         {
             fileContent = string.Empty;
-            filePath = string.Empty;
+            inputFilePath = string.Empty;
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.InitialDirectory = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
                 openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 1;
+                openFileDialog.AutoUpgradeEnabled = true;
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-                    textBox2.Text = filePath;
+                    inputFilePath = openFileDialog.FileName;
+                    inputPathTextbox.Text = inputFilePath;
+                }
+            }
+        }
+        private void browseOutputButton_Click(object sender, EventArgs e)
+        {
+            fileContent = string.Empty;
+            outputFilePath = string.Empty;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+                openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.AutoUpgradeEnabled = true;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    outputFilePath = openFileDialog.FileName;
+                    outputPathTextbox.Text = outputFilePath;
                 }
             }
         }
 
-        private void loadBUtton_Click(object sender, EventArgs e)
+        private void generateButton_Click(object sender, EventArgs e)
         {
             try
             {
-                var fileStream = File.OpenRead(filePath);
+                var fileStream = File.OpenRead(inputFilePath);
                 toolStripProgressBar1.Enabled = true;
                 using (StreamReader reader = new StreamReader(fileStream))
                 {
@@ -67,6 +91,7 @@ namespace DictionnaryGen
                     reader.DiscardBufferedData();
                     while ((line = reader.ReadLine()) != null)
                     {
+                        line = RemoveSpecialCharacters(line);
                         permute(line);
                     }
                     flushPermutations();
@@ -90,7 +115,7 @@ namespace DictionnaryGen
 
         private static string RemoveSpecialCharacters(string str)
         {
-            return Regex.Replace(str, "[^a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\n\r]+", "", RegexOptions.Compiled);
+            return Regex.Replace(str, "[^a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+", "", RegexOptions.Compiled);
         }
 
         private void permute(String input)
@@ -138,7 +163,7 @@ namespace DictionnaryGen
 
         private void flushPermutations()
         {
-            StreamWriter fs = File.AppendText(outputPath);
+            StreamWriter fs = File.AppendText(outputFilePath);
             foreach (String permutation in permList)
             {
                 fs.WriteLine(permutation);
@@ -168,10 +193,15 @@ namespace DictionnaryGen
             if (saveFileDialog1.FileName != "")
             {
                 StreamWriter fs = new StreamWriter(saveFileDialog1.OpenFile());
-                fs.Write(textBox1.Text);
+                fs.Write(outputPathTextbox.Text);
                 fs.Dispose();
                 fs.Close();
             }
+        }
+
+        private void openFileButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
