@@ -48,7 +48,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 151);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 119);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(498, 22);
             this.statusStrip1.TabIndex = 0;
@@ -73,7 +73,7 @@
             this.browseInputButton.TabIndex = 2;
             this.browseInputButton.Text = "Browse...";
             this.browseInputButton.UseVisualStyleBackColor = true;
-            this.browseInputButton.Click += new System.EventHandler(this.browseOutputButton_Click);
+            this.browseInputButton.Click += new System.EventHandler(this.browseInputButton_Click);
             // 
             // folderBrowserDialog1
             // 
@@ -85,6 +85,7 @@
             this.inputPathTextbox.Name = "inputPathTextbox";
             this.inputPathTextbox.Size = new System.Drawing.Size(323, 20);
             this.inputPathTextbox.TabIndex = 3;
+            this.inputPathTextbox.TextChanged += new System.EventHandler(this.inputPathTextbox_TextChanged);
             // 
             // generateButton
             // 
@@ -103,6 +104,7 @@
             this.outputPathTextbox.Name = "outputPathTextbox";
             this.outputPathTextbox.Size = new System.Drawing.Size(323, 20);
             this.outputPathTextbox.TabIndex = 6;
+            this.outputPathTextbox.TextChanged += new System.EventHandler(this.outputPathTextbox_TextChanged);
             // 
             // browseOutputButton
             // 
@@ -147,7 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 173);
+            this.ClientSize = new System.Drawing.Size(498, 141);
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
